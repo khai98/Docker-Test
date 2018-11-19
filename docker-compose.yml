@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+
+  cgi:
+    build:
+      context: ./
+      dockerfile: cgi.dockerfile
+    working_dir: /var/www
+    volumes:
+    - ./:/var/www
+
+
+  web:
+
+    build:
+      context: ./
+      dockerfile: web.dockerfile
+    volumes_from:
+    - cgi
+    ports:
+    - 5000:80
+
